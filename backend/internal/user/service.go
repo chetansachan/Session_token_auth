@@ -68,10 +68,13 @@ func (s *Service) Register(ctx context.Context, email, password string) (User, e
 	return s.repo.Create(ctx, email, hash)
 }
 
-// Authenticate verifies user credentials and returns the user model on success.
+// Authenticate returns the user on success. It always runs a hash comparison
+// so valid and invalid emails have near-identical latency (timing defense),
+// and returns a generic error (no user enumeration).
 func (s *Service) Authenticate(ctx context.Context, email, password string) (User, error) {
 	u, err := s.repo.GetByEmail(ctx, email)
 	if err != nil {
+		VerifyPassword(password, "c2FsdA.AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA")
 		return User{}, ErrInvalidCredentials
 	}
 	if !VerifyPassword(password, u.PasswordHash) {
