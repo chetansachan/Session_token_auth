@@ -23,6 +23,11 @@ type Manager struct {
 }
 
 func NewManager(sessions *store.SessionStore, cookieName string, secure bool, ttl time.Duration) *Manager {
+	// The __Host- prefix is only honored by browsers on Secure cookies;
+	// fall back to a plain name for local HTTP development.
+	if !secure && len(cookieName) > 7 && cookieName[:7] == "__Host-" {
+		cookieName = cookieName[7:]
+	}
 	return &Manager{sessions: sessions, cookie: cookieName, secure: secure, ttl: ttl}
 }
 
