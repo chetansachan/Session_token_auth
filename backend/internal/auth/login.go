@@ -22,13 +22,17 @@ type loginRequest struct {
 	Password string `json:"password"`
 }
 
-// Login validates user credentials and issues a new session.
+// Login verifies credentials and issues a fresh session ID.
+// A new ID on every login is the session-fixation defense: any
+// pre-login cookie value is never promoted to an authenticated session.
 func (h *Handler) Login(w http.ResponseWriter, r *http.Request) {
 	var req loginRequest
 	if err := json.NewDecoder(r.Body).Decode(&req); err != nil {
 		writeError(w, http.StatusBadRequest, "invalid request body")
 		return
 	}
+	req.Email = strings.TrimSpace(strings.ToLower(req.Email))
+
 	u, err := h.users.Authenticate(r.Context(), req.Email, req.Password)
 	if err != nil {
 		// Generic message — never reveal whether the email exists.
