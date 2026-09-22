@@ -54,3 +54,22 @@ func TestSessionDelete(t *testing.T) {
 	}
 }
 
+func TestSessionRotate(t *testing.T) {
+	s := newTestStore(t)
+	ctx := context.Background()
+
+	_ = s.Create(ctx, "old-id", store.SessionData{UserID: "u1", Email: "a@b.c"})
+	data, err := s.Rotate(ctx, "old-id", "new-id")
+	if err != nil {
+		t.Fatal(err)
+	}
+	if data.UserID != "u1" {
+		t.Fatalf("rotation lost data: %+v", data)
+	}
+	if _, err := s.Get(ctx, "old-id"); err != store.ErrNotFound {
+		t.Fatal("old session ID must be dead after rotation (fixation defense)")
+	}
+	if _, err := s.Get(ctx, "new-id"); err != nil {
+		t.Fatal("new session ID must be live after rotation")
+	}
+}
