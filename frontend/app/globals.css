@@ -1,0 +1,142 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap');
+@import "tailwindcss";
+
+:root {
+  --background: #06050b;
+  --foreground: #ffffff;
+  --card: rgba(18, 15, 28, 0.72);
+  --card-foreground: #ffffff;
+  --popover: rgba(18, 15, 28, 0.9);
+  --popover-foreground: #ffffff;
+  --primary: #9333ea;
+  --primary-foreground: #ffffff;
+  --secondary: rgba(255, 255, 255, 0.08);
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: rgba(255, 255, 255, 0.6);
+  --accent: rgba(168, 85, 247, 0.15);
+  --accent-foreground: #c084fc;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: rgba(168, 85, 247, 0.8);
+  --radius: 0.75rem;
+
+  --bg-space: #06050b;
+  --bg-card: rgba(18, 15, 28, 0.72);
+  --bg-input: rgba(255, 255, 255, 0.04);
+  --bg-input-focus: rgba(255, 255, 255, 0.07);
+  --border-subtle: rgba(255, 255, 255, 0.12);
+  --border-highlight: rgba(255, 255, 255, 0.22);
+  --border-focus: rgba(168, 85, 247, 0.8);
+  --primary-gradient: linear-gradient(135deg, #7c3aed 0%, #9333ea 50%, #a855f7 100%);
+  --primary-glow: 0 4px 25px rgba(147, 51, 234, 0.45);
+  --primary-glow-hover: 0 6px 35px rgba(168, 85, 247, 0.65);
+  --text-main: #ffffff;
+  --text-muted: rgba(255, 255, 255, 0.6);
+  --text-subtle: rgba(255, 255, 255, 0.4);
+  --accent-purple: #a855f7;
+  --accent-light: #c084fc;
+}
+
+.dark {
+  --background: #06050b;
+  --foreground: #ffffff;
+  --card: rgba(18, 15, 28, 0.72);
+  --card-foreground: #ffffff;
+  --popover: rgba(18, 15, 28, 0.9);
+  --popover-foreground: #ffffff;
+  --primary: #9333ea;
+  --primary-foreground: #ffffff;
+  --secondary: rgba(255, 255, 255, 0.08);
+  --secondary-foreground: #ffffff;
+  --muted: rgba(255, 255, 255, 0.06);
+  --muted-foreground: rgba(255, 255, 255, 0.6);
+  --accent: rgba(168, 85, 247, 0.15);
+  --accent-foreground: #c084fc;
+  --destructive: #ef4444;
+  --destructive-foreground: #ffffff;
+  --border: rgba(255, 255, 255, 0.12);
+  --input: rgba(255, 255, 255, 0.14);
+  --ring: rgba(168, 85, 247, 0.8);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  min-height: 100vh;
+  background-color: var(--bg-space);
+  color: var(--text-main);
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* Animations */
+@keyframes pulseGlow {
+  0%, 100% {
+    opacity: 0.92;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: scale(1.015);
+  }
+}
+
+@keyframes twinkle {
+  0%, 100% { opacity: 0.3; transform: scale(0.9); }
+  50% { opacity: 0.95; transform: scale(1.1); }
+}
+
+@keyframes flareShift {
+  0%, 100% {
+    opacity: 0.85;
+    filter: blur(10px) drop-shadow(0 0 30px #c084fc);
+  }
+  50% {
+    opacity: 1;
+    filter: blur(8px) drop-shadow(0 0 45px #e879f9);
+  }
+}
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeInCard {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.fade-in-card {
+  animation: fadeInCard 0.45s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.spinner {
+  width: 18px;
+  height: 18px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: #ffffff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+  display: inline-block;
+}
