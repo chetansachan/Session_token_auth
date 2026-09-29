@@ -55,6 +55,20 @@ export default function AuthForm({
         </Alert>
       )}
 
+      {/* Forgot Password Notice */}
+      {forgotPasswordNotice && (
+        <div className="p-3! rounded-xl bg-purple-950/40 border border-purple-500/30 text-purple-200 text-xs flex justify-between items-center">
+          <span>Password reset instructions are managed via the admin console.</span>
+          <button
+            type="button"
+            onClick={() => setForgotPasswordNotice(false)}
+            className="text-purple-400 hover:text-purple-200 font-bold ml-2 cursor-pointer"
+          >
+            ✕
+          </button>
+        </div>
+      )}
+
       {/* Email Input using shadcn Input */}
       <div className="relative w-full">
         <Input
@@ -83,7 +97,14 @@ export default function AuthForm({
           className="h-12 w-full pl-4! pr-16! text-sm text-white placeholder:text-white/40 bg-white/[0.04] border-white/[0.14] rounded-xl focus-visible:border-purple-500/80 focus-visible:ring-purple-500/20 focus-visible:bg-white/[0.07] transition-all"
         />
 
-
+        {/* In-field "Show" / "Hide" toggle text matching reference image */}
+        <button
+          type="button"
+          onClick={() => setShowPassword((prev) => !prev)}
+          className="absolute right-3.5 top-1/2 -translate-y-1/2 text-xs font-medium text-white/70 hover:text-white bg-transparent hover:bg-white/10 px-2 py-1 rounded-md transition-colors cursor-pointer"
+        >
+          {showPassword ? "Hide" : "Show"}
+        </button>
       </div>
 
       {/* Forgot Password link */}
