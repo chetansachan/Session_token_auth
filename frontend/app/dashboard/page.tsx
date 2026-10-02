@@ -32,10 +32,22 @@ export default function DashboardPage() {
 
   if (loading) {
     return (
-      <main className="min-h-screen flex items-center justify-center bg-[#05040a] text-white">
-        <div className="flex items-center gap-3">
+      <main
+        style={{
+          minHeight: "100vh",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+          backgroundColor: "#05040a",
+          color: "#ffffff",
+        }}
+      >
+        <CosmicBackground />
+        <div style={{ display: "flex", alignItems: "center", gap: "12px", zIndex: 10 }}>
           <span className="spinner" />
-          <span className="text-sm text-white/70">Loading session...</span>
+          <span style={{ color: "rgba(255, 255, 255, 0.7)", fontSize: "14px" }}>
+            Verifying server session...
+          </span>
         </div>
       </main>
     );
